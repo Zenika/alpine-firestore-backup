@@ -47,8 +47,14 @@ For the `GCLOUD_SERVICE_KEY`, please use a base64 encoded string using this comm
 
 Create a Cloud Run service using your image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup` and set the 3 environment variables seen in the previous section.
 
+Screenshot:
+![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
+
 # Launch with Cloud Scheduler
 
 Then, prepare a Cloud Scheduler to make request to your Cloud Run Service every time you need.
 
 For example, every Monday at 3:00am `0 3 * * 1`
+
+Screenshot:
+![cloud-scheduler](https://user-images.githubusercontent.com/525974/62141536-02792d80-b2ed-11e9-80fe-b81466cb862d.png)
