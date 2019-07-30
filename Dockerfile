@@ -7,7 +7,8 @@ ENV PORT "8080"
 
 RUN gcloud components install beta
 
-CMD echo $GCLOUD_SERVICE_KEY | base64 -d > "key.json" \
-    && gcloud auth activate-service-account --project=$GCLOUD_PROJECT_NAME --key-file="key.json" \
-    && gcloud beta firestore export gs://$GCLOUD_BUCKET_NAME \
-    && python -m SimpleHTTPServer $PORT
+COPY --from=msoap/shell2http /app/shell2http /shell2http
+COPY firestore-export.sh operations-list.sh /
+
+ENTRYPOINT ["/shell2http","-export-all-vars"]
+CMD ["/backup","/firestore-export.sh","/list","/operations-list.sh"]
