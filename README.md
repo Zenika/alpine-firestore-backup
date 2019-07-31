@@ -8,9 +8,17 @@ We use a lot of Firebase features like Firestore.
 But there is no simple way to backup the data.
 This image aims to be used inside the Google Cloud Platform to perform backups automatically.
 
-# Push the image your registry
+# 2 ways to backup your Firestore data
 
-Clone this repository:
+## Use the public image
+
+You can use the public `gcr` image available on `gcr.io/zenika-hub/alpine-firestore-backup`
+
+## Create your own image
+
+You can also create your own image from the repository to be independant. But you have to maintain the update of your image by yourself.
+
+To do this, clone this repository:
 
 ```sh
 git clone https://github.com/jlandure/alpine-firestore-backup.git
@@ -60,7 +68,7 @@ cat key.json | base64
 
 # Set up Cloud Run
 
-Create a `Cloud Run service` using your image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup`.
+Create a `Cloud Run service` using the public image `gcr.io/zenika-hub/alpine-firestore-backup` or your own image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup`.
 
 Be careful to:
 
@@ -69,6 +77,8 @@ Be careful to:
 - Enter a service name
 - Select "Allow unauthenticated invocations"
 - In the "Show optional settings / Environment variables", set the 3 environment variables seen in the previous section
+
+You can test the service using your browser: `https://alpine-firestore-backup-XXX-run.app/`
 
 Save the url created to call your Cloud Run Service.
 For example: `https://alpine-firestore-backup-XXX-run.app/backup`
