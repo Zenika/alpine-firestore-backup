@@ -68,6 +68,8 @@ cat key.json | base64
 
 # Set up Cloud Run
 
+[Cloud Run](https://cloud.google.com/run/docs/deploying) is a serverless service to automatically serve your containers using http.
+
 Create a `Cloud Run service` using the public image `gcr.io/zenika-hub/alpine-firestore-backup` or your own image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup`.
 
 Be careful to:
@@ -86,6 +88,8 @@ For example: `https://alpine-firestore-backup-XXX-run.app/backup`
 ![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
 
 # Launch with Cloud Scheduler
+
+[Cloud Scheduler](https://cloud.google.com/scheduler/docs/) allow you to schedule a cronjob in order to call a https endpoint at regular intervals.
 
 Prepare a `Cloud Scheduler` to send a request to your `Cloud Run Service` every time you need.
 
