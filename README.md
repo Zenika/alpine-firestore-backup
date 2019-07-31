@@ -73,7 +73,6 @@ Be careful to:
 Save the url created to call your Cloud Run Service.
 For example: `https://alpine-firestore-backup-XXX-run.app/backup`
 
-Screenshot:
 ![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
 
 # Launch with Cloud Scheduler
