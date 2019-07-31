@@ -21,7 +21,7 @@ You can also create your own image from the repository to be independant. But yo
 To do this, clone this repository:
 
 ```sh
-git clone https://github.com/jlandure/alpine-firestore-backup.git
+git clone https://github.com/zenika/alpine-firestore-backup.git
 ```
 
 Build:
