@@ -68,10 +68,10 @@ Be careful to:
 - Choose "Cloud Run (fully managed)" and a location
 - Enter a service name
 - Select "Allow unauthenticated invocations"
-- In the "Show optional settings / Environment variables", set the 3 environment variables seen in the previous section 
+- In the "Show optional settings / Environment variables", set the 3 environment variables seen in the previous section
 
 Save the url created to call your Cloud Run Service.
-For example: `https://https://alpine-firestore-backup-XXX-run.app/backup`
+For example: `https://alpine-firestore-backup-XXX-run.app/backup`
 
 Screenshot:
 ![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
@@ -83,3 +83,7 @@ Prepare a `Cloud Scheduler` to send a request to your `Cloud Run Service` every 
 For example, every Monday at 3:00am `0 3 * * 1`
 
 ![cloud-scheduler](https://user-images.githubusercontent.com/525974/62141536-02792d80-b2ed-11e9-80fe-b81466cb862d.png)
+
+# Monitor the backup operations
+
+You can also check the current status of each backup operation using the following url `https://alpine-firestore-backup-XXX-run.app/list`
