@@ -1,20 +1,29 @@
 # alpine-firestore-backup
 
-Firestore backup image based on alpine google sdk image
+Image that performs Firestore backups based on `google/cloud-sdk:alpine` image.
+
+# Why this image
+
+We use a lot of Firebase features like Firestore.
+But there is no simple way to backup the data.
+This image aims to be used inside the Google Cloud Platform to perform backups automatically.
 
 # Push the image your registry
 
 Clone this repository:
+
 ```sh
 git clone https://github.com/jlandure/alpine-firestore-backup.git
 ```
 
 Build:
+
 ```sh
 docker image build -t gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
 ```
 
 Push:
+
 ```sh
 gcloud auth configure-docker
 gcloud push gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
@@ -44,14 +53,27 @@ Please fill in the following information:
 - `GCLOUD_SERVICE_KEY`
 
 For the `GCLOUD_SERVICE_KEY`, make a base64 encoded string using this command:
+
 ```sh
 cat key.json | base64
 ```
 
 # Set up Cloud Run
 
-Create a `Cloud Run service` using your image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup` and set the 3 environment variables seen in the previous section.
+Create a `Cloud Run service` using your image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup`.
 
+Be careful to:
+
+- Choose your newly image in `latest`
+- Choose "Cloud Run (fully managed)" and a location
+- Enter a service name
+- Select "Allow unauthenticated invocations"
+- In the "Show optional settings / Environment variables", set the 3 environment variables seen in the previous section 
+
+Save the url created to call your Cloud Run Service.
+For example: `https://https://alpine-firestore-backup-XXX-run.app/backup`
+
+Screenshot:
 ![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
 
 # Launch with Cloud Scheduler
