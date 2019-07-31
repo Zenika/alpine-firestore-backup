@@ -4,18 +4,21 @@ Firestore backup image based on alpine google sdk image
 
 # Push the image your registry
 
-Clone this repository and launch the following command:
-`git clone https://github.com/jlandure/alpine-firestore-backup.git`
+Clone this repository:
+```sh
+git clone https://github.com/jlandure/alpine-firestore-backup.git
+```
 
 Build:
-
-`docker image build -t gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup`
+```sh
+docker image build -t gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
+```
 
 Push:
-
-`gcloud auth configure-docker`
-
-`gcloud push gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup`
+```sh
+gcloud auth configure-docker
+gcloud push gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
+```
 
 # Create a bucket on GCP
 
@@ -34,27 +37,27 @@ Then, download the [JSON private key file](https://cloud.google.com/iam/docs/cre
 
 # Create your env variables for Cloud Run
 
-Please refer the following information:
+Please fill in the following information:
 
 - `GCLOUD_PROJECT_NAME`
 - `GCLOUD_BUCKET_NAME`
 - `GCLOUD_SERVICE_KEY`
 
-For the `GCLOUD_SERVICE_KEY`, please use a base64 encoded string using this command:
-`cat key.json | base64`
+For the `GCLOUD_SERVICE_KEY`, make a base64 encoded string using this command:
+```sh
+cat key.json | base64
+```
 
 # Set up Cloud Run
 
-Create a Cloud Run service using your image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup` and set the 3 environment variables seen in the previous section.
+Create a `Cloud Run service` using your image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup` and set the 3 environment variables seen in the previous section.
 
-Screenshot:
 ![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
 
 # Launch with Cloud Scheduler
 
-Then, prepare a Cloud Scheduler to make request to your Cloud Run Service every time you need.
+Prepare a `Cloud Scheduler` to send a request to your `Cloud Run Service` every time you need.
 
 For example, every Monday at 3:00am `0 3 * * 1`
 
-Screenshot:
 ![cloud-scheduler](https://user-images.githubusercontent.com/525974/62141536-02792d80-b2ed-11e9-80fe-b81466cb862d.png)
