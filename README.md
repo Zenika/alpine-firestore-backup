@@ -36,11 +36,11 @@ Build:
 docker image build -t gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
 ```
 
-Push:
+Push using [Container Registry Authentication](https://cloud.google.com/container-registry/docs/advanced-authentication):
 
 ```sh
 gcloud auth configure-docker
-gcloud push gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
+docker push gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
 ```
 
 # Create a bucket on GCP
