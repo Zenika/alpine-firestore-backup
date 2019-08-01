@@ -1,3 +1,9 @@
+[![Docker Build Status](https://img.shields.io/docker/build/zenika/alpine-firestore-backup.svg)](https://hub.docker.com/r/zenika/alpine-firestore-backup/) [![Docker Pulls](https://img.shields.io/docker/pulls/zenika/alpine-firestore-backup.svg)](https://hub.docker.com/r/zenika/alpine-firestore-backup/) [![Layers](https://images.microbadger.com/badges/image/zenika/alpine-firestore-backup.svg)](https://microbadger.com/images/zenika/alpine-firestore-backup) [![Version](https://images.microbadger.com/badges/version/zenika/alpine-firestore-backup.svg)](https://microbadger.com/images/zenika/alpine-firestore-backup)
+
+# Supported tags and respective `Dockerfile` links
+
+- `latest`, `256.0.0` [(Dockerfile)](https://github.com/Zenika/alpine-chrome/blob/master/Dockerfile)
+
 # alpine-firestore-backup
 
 Image that performs Firestore backups based on `google/cloud-sdk:alpine` image.
