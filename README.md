@@ -33,14 +33,14 @@ git clone https://github.com/zenika/alpine-firestore-backup.git
 Build:
 
 ```sh
-docker image build -t gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
+docker image build -t gcr.io/[GCLOUD_PROJECT_ID]/alpine-firestore-backup
 ```
 
 Push using [Container Registry Authentication](https://cloud.google.com/container-registry/docs/advanced-authentication):
 
 ```sh
 gcloud auth configure-docker
-docker push gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup
+docker push gcr.io/[GCLOUD_PROJECT_ID]/alpine-firestore-backup
 ```
 
 # Create a bucket on GCP
@@ -62,7 +62,7 @@ Then, download the [JSON private key file](https://cloud.google.com/iam/docs/cre
 
 Please fill in the following information:
 
-- `GCLOUD_PROJECT_NAME`
+- `GCLOUD_PROJECT_ID`
 - `GCLOUD_BUCKET_NAME`
 - `GCLOUD_SERVICE_KEY`
 
@@ -76,7 +76,7 @@ cat key.json | base64
 
 [Cloud Run](https://cloud.google.com/run/docs/deploying) is a serverless service to automatically serve your containers using http.
 
-Create a `Cloud Run service` using the public image `gcr.io/zenika-hub/alpine-firestore-backup` or your own image `gcr.io/[GCLOUD_PROJECT_NAME]/alpine-firestore-backup`.
+Create a `Cloud Run service` using the public image `gcr.io/zenika-hub/alpine-firestore-backup` or your own image `gcr.io/[GCLOUD_PROJECT_ID]/alpine-firestore-backup`.
 
 Be careful to:
 
