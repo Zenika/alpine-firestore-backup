@@ -2,7 +2,8 @@
 
 # Supported tags and respective `Dockerfile` links
 
-- `latest`, `256.0.0` [(Dockerfile)](https://github.com/Zenika/alpine-firestore-backup/blob/master/Dockerfile)
+- `latest`, `257.0.0` [(Dockerfile)](https://github.com/Zenika/alpine-firestore-backup/blob/master/Dockerfile)
+- `256.0.0`
 
 # alpine-firestore-backup
 
