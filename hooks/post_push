@@ -18,6 +18,6 @@ for published_tag in "latest" $tag; do
     docker push gcr.io/zenika-hub/alpine-firestore-backup:${published_tag}
     for region in "us" "eu" "asia"; do
         docker tag $IMAGE_NAME $region.gcr.io/zenika-hub/alpine-firestore-backup:${published_tag}
-        docker push gcr.io/zenika-hub/alpine-firestore-backup:${published_tag}
+        docker push $region.gcr.io/zenika-hub/alpine-firestore-backup:${published_tag}
     done
 done
