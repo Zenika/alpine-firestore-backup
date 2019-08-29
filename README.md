@@ -23,6 +23,12 @@ This image aims to be used inside the Google Cloud Platform to perform backups a
 ## Use the public image
 
 You can use the public `gcr` image available on `gcr.io/zenika-hub/alpine-firestore-backup`
+We publish the image in the 4 container registries to be available in the closest region:
+
+- Global: `gcr.io/zenika-hub/alpine-firestore-backup`
+- Europe: `eu.gcr.io/zenika-hub/alpine-firestore-backup`
+- Asia: `asia.io/zenika-hub/alpine-firestore-backup`
+- US: `us.io/zenika-hub/alpine-firestore-backup`
 
 ## Create your own image
 
