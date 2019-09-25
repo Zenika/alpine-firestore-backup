@@ -15,7 +15,13 @@ We use a lot of Firebase features like Firestore.
 But there is no simple way to backup the data.
 This image aims to be used inside the Google Cloud Platform to perform backups automatically.
 
-# 2 ways to backup your Firestore data
+# 3 ways to backup your Firestore data
+
+## Use the Cloud Run Button
+
+Please give a feedback on this **new** way to deploy it ✨
+
+[![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/Zenika/alpine-firestore-backup)
 
 ## Use the public image
 
