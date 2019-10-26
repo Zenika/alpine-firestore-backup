@@ -18,15 +18,46 @@ This image aims to be used inside the Google Cloud Platform to perform backups a
 
 [See this article for more information.](https://dev.to/zenika/how-to-backup-your-firestore-data-automatically-48em)
 
-# 3 ways to backup your Firestore data
+# Prerequisites
 
-## Use the Cloud Run Button
+## Create a bucket on GCP
+
+Create a [GCP coldline bucket](https://cloud.google.com/storage/docs/storage-classes) and save the name of your bucket.
+
+## Create a service account
+
+Create a [GCP Service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the following rights:
+
+- `Owner`
+- `Cloud Datastore Owner`
+- `Cloud Datastore Import Export Admin`
+- `Storage Admin`
+
+Then, download the [JSON private key file](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
+
+## Prepare your env variables for Cloud Run
+
+Please fill in the following information:
+
+- `GCLOUD_PROJECT_ID`
+- `GCLOUD_BUCKET_NAME`
+- `GCLOUD_SERVICE_KEY`
+
+For the `GCLOUD_SERVICE_KEY`, make a base64 encoded string using this command:
+
+```sh
+cat key.json | base64
+```
+
+# 3 ways to create your image ready to use on Cloud Run
+
+## 1. Use the Cloud Run Button
 
 Please give a feedback on this **new** way to deploy it ✨
 
 [![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/Zenika/alpine-firestore-backup)
 
-## Use the public image
+## 2. Use a public image
 
 You can use the public `gcr` image available on `gcr.io/zenika-hub/alpine-firestore-backup`
 We publish the image in the 4 container registries to be available in the closest region:
@@ -36,7 +67,7 @@ We publish the image in the 4 container registries to be available in the closes
 - Asia: `asia.io/zenika-hub/alpine-firestore-backup`
 - US: `us.io/zenika-hub/alpine-firestore-backup`
 
-## Create your own image
+## 3. Create your own image
 
 You can also create your own image from the repository to be independant. But you have to maintain the update of your image by yourself.
 
@@ -59,38 +90,15 @@ gcloud auth configure-docker
 docker push gcr.io/[GCLOUD_PROJECT_ID]/alpine-firestore-backup
 ```
 
-# Create a bucket on GCP
-
-Create a [GCP coldline bucket](https://cloud.google.com/storage/docs/storage-classes) and save the name of your bucket.
-
-# Create a service account
-
-Create a [GCP Service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the following rights:
-
-- `Owner`
-- `Cloud Datastore Owner`
-- `Cloud Datastore Import Export Admin`
-- `Storage Admin`
-
-Then, download the [JSON private key file](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
-
-# Create your env variables for Cloud Run
-
-Please fill in the following information:
-
-- `GCLOUD_PROJECT_ID`
-- `GCLOUD_BUCKET_NAME`
-- `GCLOUD_SERVICE_KEY`
-
-For the `GCLOUD_SERVICE_KEY`, make a base64 encoded string using this command:
-
-```sh
-cat key.json | base64
-```
-
-# Set up Cloud Run
+# 3 ways to set up your Cloud Run service
 
 [Cloud Run](https://cloud.google.com/run/docs/deploying) is a serverless service to automatically serve your containers using http.
+
+## 1. Use the Cloud Run Button
+
+It will deploy it automatically.
+
+## 2. Use the WebUI
 
 Create a `Cloud Run service` using the public image `gcr.io/zenika-hub/alpine-firestore-backup` or your own image `gcr.io/[GCLOUD_PROJECT_ID]/alpine-firestore-backup`.
 
@@ -102,6 +110,32 @@ Be careful to:
 - Select "Allow unauthenticated invocations"
 - In the "Show optional settings / Environment variables", set the 3 environment variables seen in the previous section
 
+## 3. Use the CLI
+
+If you're fan of CLI, please use the following command to create your `Cloud Run` service:
+
+```
+gcloud beta run deploy alpine-firestore-backup\
+    --project=my-awesome-project\
+    --platform=managed\
+    --region=europe-west1\
+    --image=zenika-hub/alpine-firestore-backup\
+    --memory=256Mi\
+    --allow-unauthenticated\
+    --set-env-vars GCLOUD_PROJECT_ID=VALUE,GCLOUD_BUCKET_NAME=VALUE,GCLOUD_SERVICE_KEY=VALUE
+```
+
+Check the deployment using the following command:
+
+```
+gcloud beta run services list\
+    --project my-awesome-project\
+    --platform managed\
+    --region=europe-west1\
+```
+
+# Test and validate
+
 You can test the service using your browser: `https://alpine-firestore-backup-XXX-run.app/`
 
 Save the url created to call your Cloud Run Service.
@@ -109,7 +143,7 @@ For example: `https://alpine-firestore-backup-XXX-run.app/backup`
 
 ![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
 
-# Launch with Cloud Scheduler
+# Schedule it with Cloud Scheduler
 
 [Cloud Scheduler](https://cloud.google.com/scheduler/docs/) allow you to schedule a cronjob in order to call a https endpoint at regular intervals.
 
