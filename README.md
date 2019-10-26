@@ -13,7 +13,10 @@ Image that performs Firestore backups based on `google/cloud-sdk:alpine` image.
 
 We use a lot of Firebase features like Firestore.
 But there is no simple way to backup the data.
+
 This image aims to be used inside the Google Cloud Platform to perform backups automatically.
+
+[See this article for more information.](https://dev.to/zenika/how-to-backup-your-firestore-data-automatically-48em)
 
 # 3 ways to backup your Firestore data
 
