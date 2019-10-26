@@ -2,8 +2,8 @@
 
 # Supported tags and respective `Dockerfile` links
 
-- `latest`, `266.0.0` [(Dockerfile)](https://github.com/Zenika/alpine-firestore-backup/blob/master/Dockerfile)
-- from `265.0.0` to `256.0.0` (all listed versions [here](https://hub.docker.com/r/zenika/alpine-firestore-backup/tags))
+- `latest`, `268.0.0` [(Dockerfile)](https://github.com/Zenika/alpine-firestore-backup/blob/master/Dockerfile)
+- from `267.0.0` to `256.0.0` (all listed versions [here](https://hub.docker.com/r/zenika/alpine-firestore-backup/tags))
 
 # alpine-firestore-backup
 
