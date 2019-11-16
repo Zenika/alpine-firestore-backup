@@ -15,7 +15,6 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 ENV GCLOUD_PROJECT_ID "conference-hall"
 ENV GCLOUD_BUCKET_NAME "firestore-backup-conference-hall-test"
-ENV GCLOUD_SERVICE_KEY "base 64{ type: service_account, project_id: XXX }"
 ENV PORT "8080"
 
 RUN gcloud components install beta

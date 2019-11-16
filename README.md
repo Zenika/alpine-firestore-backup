@@ -28,12 +28,8 @@ Create a [GCP coldline bucket](https://cloud.google.com/storage/docs/storage-cla
 
 Create a [GCP Service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the following rights:
 
-- `Owner`
-- `Cloud Datastore Owner`
 - `Cloud Datastore Import Export Admin`
 - `Storage Admin`
-
-Then, download the [JSON private key file](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
 
 ## Prepare your env variables for Cloud Run
 
@@ -41,19 +37,14 @@ Please fill in the following information:
 
 - `GCLOUD_PROJECT_ID`
 - `GCLOUD_BUCKET_NAME`
-- `GCLOUD_SERVICE_KEY`
-
-For the `GCLOUD_SERVICE_KEY`, make a base64 encoded string using this command:
-
-```sh
-cat key.json | base64
-```
 
 # 3 ways to create your image ready to use on Cloud Run
 
 ## 1. Use the Cloud Run Button
 
 Please give a feedback on this **new** way to deploy it ✨
+
+*For this deployment, the new service account can't be used. Simply grant the default (<project_id>-compute@developer.gserviceaccount.com) service account with the required roles*
 
 [![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/Zenika/alpine-firestore-backup)
 
@@ -110,7 +101,8 @@ gcloud beta run deploy alpine-firestore-backup\
     --image=zenika-hub/alpine-firestore-backup\
     --memory=256Mi\
     --allow-unauthenticated\
-    --set-env-vars GCLOUD_PROJECT_ID=VALUE,GCLOUD_BUCKET_NAME=VALUE,GCLOUD_SERVICE_KEY=VALUE
+    --set-env-vars GCLOUD_PROJECT_ID=VALUE,GCLOUD_BUCKET_NAME=VALUE\
+    --service-account=my-service-account@my-awesome-project.iam.gserviceaccount.com
 ```
 
 Check the deployment using the following command:
@@ -133,6 +125,7 @@ Be careful to:
 - Enter a service name
 - Select "Allow unauthenticated invocations"
 - In the "Show optional settings / Environment variables", set the 3 environment variables seen in the previous section
+- In the "Service account" part, select your previously created service account
 
 ![cloud-run](https://user-images.githubusercontent.com/525974/62141405-ce9e0800-b2ec-11e9-8763-45efddb4c55d.png)
 

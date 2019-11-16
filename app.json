@@ -10,11 +10,6 @@
       "description": "please specify the bucket name to store the backups (see https://dev.to/jlandure/how-to-backup-your-firestore-data-automatically-48em for more information)",
       "value": "firestore-backup",
       "required": true
-    },
-    "GCLOUD_SERVICE_KEY": {
-      "description": "please specify the service key allowed to do the operation (see https://dev.to/jlandure/how-to-backup-your-firestore-data-automatically-48em for more information)",
-      "value": "using 'cat key.json | base64'",
-      "required": true
     }
   }
 }

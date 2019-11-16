@@ -1,4 +1,3 @@
 #!/bin/sh
-echo "$GCLOUD_SERVICE_KEY" | base64 -d > 'key.json'
-gcloud auth activate-service-account --project="$GCLOUD_PROJECT_ID" --key-file='key.json'
+gcloud config set project $GCLOUD_PROJECT_ID
 gcloud beta firestore operations list
